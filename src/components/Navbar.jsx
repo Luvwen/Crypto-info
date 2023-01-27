@@ -1,5 +1,6 @@
-import { Box, Input, Stack, Text } from '@chakra-ui/react';
+import { Box, Input, Link, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export const Navbar = () => {
     return (
@@ -11,18 +12,30 @@ export const Navbar = () => {
             margin="0 auto"
             width="75vw"
         >
-            <Stack direction="row">
-                <Text>Icono</Text>
-                <Text>Luvwen market cap</Text>
+            <Link as={LinkRouter} to="/">
+                <Stack cursor="pointer" direction="row">
+                    <Text>Icono</Text>
+                    <Text>Luvwen market cap</Text>
+                </Stack>
+            </Link>
+            <Stack as="ul" direction="row" listStyleType="none" spacing="5">
+                <Text as="li" cursor="pointer">
+                    Criptomonedas
+                </Text>
+                <Text as="li" cursor="pointer">
+                    Intercambios
+                </Text>
+                <Text as="li" cursor="pointer">
+                    Comunidad
+                </Text>
+                <Text as="li" cursor="pointer">
+                    Productos
+                </Text>
+                <Text as="li" cursor="pointer">
+                    Aprender
+                </Text>
             </Stack>
-            <Stack direction="row" spacing="5">
-                <Text>Criptomonedas</Text>
-                <Text>Intercambios</Text>
-                <Text>Comunidad</Text>
-                <Text>Productos</Text>
-                <Text>Aprender</Text>
-            </Stack>
-            <Text>Lista de seguimiento</Text>
+            <Text cursor="pointer">Lista de seguimiento</Text>
             <Input placeholder="Buscar divisas" width="15vw" />
         </Box>
     );

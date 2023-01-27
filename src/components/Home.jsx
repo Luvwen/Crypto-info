@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Box,
-    Heading,
-    Image,
-    Stack,
-    Table,
-    Tbody,
-    Text,
-    Th,
-    Thead,
-    Tr,
-} from '@chakra-ui/react';
+import { Box, Stack, Table } from '@chakra-ui/react';
+import { Loading } from './Loading';
+import { TableCoins } from './Coins/TableCoins';
+import { TableTitles } from './Coins/TableTitles';
 
 export const Home = () => {
     const [coins, setCoins] = useState([]);
@@ -22,81 +14,20 @@ export const Home = () => {
         fetch(ENDPOINT)
             .then((response) => response.json())
             .then((data) => {
+                setIsFetching(true);
                 setCoins(data);
                 setIsFetching(false);
             });
     }, []);
 
-    if (isFetching) return <Heading>Loading...</Heading>;
+    if (isFetching) return <Loading />;
+
     return (
         <Stack minHeight="100vh" minWidth="100vw">
             <Box margin="100px auto 0" width="70vw">
                 <Table>
-                    <Thead>
-                        <Tr>
-                            <Th textAlign="center">#</Th>
-                            <Th textAlign="center">Nombre</Th>
-                            <Th textAlign="center">Precio</Th>
-                            <Th textAlign="center">1h%</Th>
-                            <Th textAlign="center">24h%</Th>
-                            <Th textAlign="center">7d%</Th>
-                            <Th textAlign="center">Cap. de Mercado</Th>
-                            <Th textAlign="center">Acciones en circulación</Th>
-                            <Th textAlign="center">Últimos 7 días</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {coins.map((coin, index) => (
-                            <Tr key={index}>
-                                <Th textAlign="center">{index}</Th>
-                                <Th textAlign="center">
-                                    <Stack
-                                        alignItems="center"
-                                        direction="row"
-                                        spacing="3"
-                                    >
-                                        <Image
-                                            height="25px"
-                                            src={coin.image}
-                                            width="25px"
-                                        />
-                                        <Text>
-                                            {coin.id}{' '}
-                                            <Text as="span" color="gray.400">
-                                                {coin.symbol}
-                                            </Text>
-                                        </Text>
-                                    </Stack>
-                                </Th>
-                                <Th textAlign="center">
-                                    ${coin.current_price}
-                                </Th>
-                                <Th textAlign="center">
-                                    {
-                                        coin.price_change_percentage_1h_in_currency
-                                    }
-                                </Th>
-                                <Th textAlign="center">
-                                    {
-                                        coin.price_change_percentage_24h_in_currency
-                                    }
-                                </Th>
-                                <Th textAlign="center">
-                                    {
-                                        coin.price_change_percentage_7d_in_currency
-                                    }
-                                </Th>
-                                <Th textAlign="center">${coin.market_cap}</Th>
-                                <Th textAlign="center">
-                                    {coin.circulating_supply}{' '}
-                                    <Text as="span" color="gray.400">
-                                        {coin.symbol}
-                                    </Text>
-                                </Th>
-                                <Th textAlign="center">{index}</Th>
-                            </Tr>
-                        ))}
-                    </Tbody>
+                    <TableTitles />
+                    <TableCoins coins={coins} />
                 </Table>
             </Box>
         </Stack>
