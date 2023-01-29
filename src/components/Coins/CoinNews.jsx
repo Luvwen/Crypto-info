@@ -26,7 +26,9 @@ export const CoinNews = ({ coinName }) => {
             .then((data) => setNewsData(data), setIsFetching(false))
             .catch((err) => console.error(err));
     }, [coinName]);
+
     if (isFetching) return <Loading />;
+
     return (
         <Stack spacing="5">
             <Heading fontSize="3xl">News</Heading>
@@ -53,7 +55,7 @@ export const CoinNews = ({ coinName }) => {
                             />
                             <Stack spacing="1">
                                 <Link
-                                    href={news.url}
+                                    href={news?.url}
                                     isExternal
                                     rel="nofollow noreferrer noopener"
                                     target="_blank"
@@ -66,7 +68,7 @@ export const CoinNews = ({ coinName }) => {
                                     {milisecondsToActualDate}
                                 </Text>
                                 <Text fontSize="sm" noOfLines={2}>
-                                    {news.description}
+                                    {news?.description}
                                 </Text>
                             </Stack>
                         </Stack>
