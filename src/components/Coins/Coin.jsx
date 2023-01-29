@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Divider, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { Loading } from '../Loading';
-import { Sidebar } from './Sidebar';
+import { SidebarInfo } from './SidebarInfo';
+import { SidebarCoins } from './SidebarCoins';
+import { CoinNews } from './CoinNews';
 
 export const Coin = () => {
     const [coin, setCoin] = useState({});
@@ -28,10 +30,11 @@ export const Coin = () => {
                 <Heading as="h2">{idToUppercase}</Heading>
                 <Divider height="1px" width="50vw" />
                 <Stack direction="row" spacing="5">
+                    {/* eslint-disable-next-line */}
                     <Image
                         alt={idToUppercase + ' icon'}
                         height="80px"
-                        src={coin.image?.large}
+                        src={coin?.image?.large}
                         width="80px"
                     />
                     <Stack spacing="0">
@@ -45,71 +48,101 @@ export const Coin = () => {
                     </Stack>
                 </Stack>
                 <Divider height="1px" width="50vw" />
-                <Stack direction="row" spacing="64">
-                    <Stack width="400px">
-                        <Stack alignItems="center" direction="row">
-                            <Text whiteSpace="nowrap">Market Cap</Text>
-                            <Divider bg="gray.400" height="1px" width="2xl" />
-                            <Text whiteSpace="nowrap">
-                                $
-                                {coin?.market_data?.market_cap?.usd?.toLocaleString(
-                                    2
-                                )}
-                            </Text>
-                        </Stack>
-                        <Stack alignItems="center" direction="row">
-                            <Text whiteSpace="nowrap">Circulating Supply</Text>
-                            <Divider bg="gray.400" height="1px" width="2xl" />
-                            <Text whiteSpace="nowrap">
-                                ${coin?.symbol?.toUpperCase() + ' '}
-                                {coin?.market_data?.circulating_supply?.toLocaleString(
-                                    2
-                                )}
-                            </Text>
-                        </Stack>
-                        <Stack alignItems="center" direction="row">
-                            <Text whiteSpace="nowrap">Max Supply</Text>
-                            <Divider bg="gray.400" height="1px" width="2xl" />
-                            <Text whiteSpace="nowrap">
-                                ${coin?.symbol?.toUpperCase() + ' '}
-                                {coin?.market_data?.max_supply?.toLocaleString(
-                                    2
-                                )}
-                            </Text>
-                        </Stack>
-                        <Stack alignItems="center" direction="row">
-                            <Text whiteSpace="nowrap">Vol (24H)</Text>
-                            <Divider bg="gray.400" height="1px" width="2xl" />
-                            <Text whiteSpace="nowrap">
-                                $
-                                {coin?.market_data?.high_24h?.usd?.toLocaleString(
-                                    2
-                                )}
-                                B
-                            </Text>
-                        </Stack>
-                        <Stack alignItems="center" direction="row">
-                            <Text whiteSpace="nowrap">Change (7D)</Text>
-                            <Divider bg="gray.400" height="1px" width="2xl" />
-                            <Text
-                                color={
-                                    coin?.market_data
-                                        ?.price_change_percentage_7d > 0
-                                        ? 'green'
-                                        : 'red'
-                                }
-                                whiteSpace="nowrap"
-                            >
-                                <Text as="span" whiteSpace="nowrap">
-                                    {coin?.market_data
-                                        ?.price_change_percentage_7d > 0 && '+'}
+                <Stack direction="row" justifyContent="space-between">
+                    <Stack spacing="10" width="60%">
+                        <Stack width="400px">
+                            <Stack alignItems="center" direction="row">
+                                <Text whiteSpace="nowrap">Market Cap</Text>
+                                <Divider
+                                    bg="gray.400"
+                                    height="1px"
+                                    width="2xl"
+                                />
+                                <Text whiteSpace="nowrap">
+                                    $
+                                    {coin?.market_data?.market_cap?.usd?.toLocaleString(
+                                        2
+                                    )}
                                 </Text>
-                                {coin?.market_data?.price_change_percentage_7d}
-                            </Text>
+                            </Stack>
+                            <Stack alignItems="center" direction="row">
+                                <Text whiteSpace="nowrap">
+                                    Circulating Supply
+                                </Text>
+                                <Divider
+                                    bg="gray.400"
+                                    height="1px"
+                                    width="2xl"
+                                />
+                                <Text whiteSpace="nowrap">
+                                    ${coin?.symbol?.toUpperCase() + ' '}
+                                    {coin?.market_data?.circulating_supply?.toLocaleString(
+                                        2
+                                    )}
+                                </Text>
+                            </Stack>
+                            <Stack alignItems="center" direction="row">
+                                <Text whiteSpace="nowrap">Max Supply</Text>
+                                <Divider
+                                    bg="gray.400"
+                                    height="1px"
+                                    width="2xl"
+                                />
+                                <Text whiteSpace="nowrap">
+                                    ${coin?.symbol?.toUpperCase() + ' '}
+                                    {coin?.market_data?.max_supply?.toLocaleString(
+                                        2
+                                    )}
+                                </Text>
+                            </Stack>
+                            <Stack alignItems="center" direction="row">
+                                <Text whiteSpace="nowrap">Vol (24H)</Text>
+                                <Divider
+                                    bg="gray.400"
+                                    height="1px"
+                                    width="2xl"
+                                />
+                                <Text whiteSpace="nowrap">
+                                    $
+                                    {coin?.market_data?.high_24h?.usd?.toLocaleString(
+                                        2
+                                    )}
+                                    B
+                                </Text>
+                            </Stack>
+                            <Stack alignItems="center" direction="row">
+                                <Text whiteSpace="nowrap">Change (7D)</Text>
+                                <Divider
+                                    bg="gray.400"
+                                    height="1px"
+                                    width="2xl"
+                                />
+                                <Text
+                                    color={
+                                        coin?.market_data
+                                            ?.price_change_percentage_7d > 0
+                                            ? 'green'
+                                            : 'red'
+                                    }
+                                    whiteSpace="nowrap"
+                                >
+                                    <Text as="span" whiteSpace="nowrap">
+                                        {coin?.market_data
+                                            ?.price_change_percentage_7d > 0 &&
+                                            '+'}
+                                    </Text>
+                                    {
+                                        coin?.market_data
+                                            ?.price_change_percentage_7d
+                                    }
+                                </Text>
+                            </Stack>
                         </Stack>
+                        <CoinNews coinName={id} />
                     </Stack>
-                    <Stack border="1px solid #dadada" borderRadius="10px">
-                        <Sidebar />
+                    <Stack spacing="12" width="35%">
+                        <SidebarCoins />
+                        <SidebarInfo />
                     </Stack>
                 </Stack>
             </Stack>
