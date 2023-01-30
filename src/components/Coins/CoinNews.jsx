@@ -16,12 +16,12 @@ export const CoinNews = ({ coinName }) => {
     };
 
     const BASE_URL = 'https://bing-news-search1.p.rapidapi.com/news';
-
     const OPTIONAL_PARAMS =
         'count=3&setLang=EN&freshness=Day&textFormat=Raw&safeSearch=Off&mkt=en-US';
+    const ENTIRE_URL = `${BASE_URL}/search?q=${coinName}&${OPTIONAL_PARAMS}`;
 
     useEffect(() => {
-        fetch(`${BASE_URL}/search?q=${coinName}&${OPTIONAL_PARAMS}`, options)
+        fetch(ENTIRE_URL, options)
             .then((response) => response.json())
             .then((data) => setNewsData(data), setIsFetching(false))
             .catch((err) => console.error(err));

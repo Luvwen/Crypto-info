@@ -7,11 +7,13 @@ export const SidebarCoins = () => {
     const [isFetching, setIsFetching] = useState(true);
 
     const { id } = useParams();
+
+    const FETCH_URL =
+        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d';
+
     useEffect(() => {
         setIsFetching(true);
-        fetch(
-            'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d'
-        )
+        fetch(FETCH_URL)
             .then((response) => response.json())
             .then(
                 (data) =>

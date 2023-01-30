@@ -1,23 +1,17 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Divider, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { Loading } from '../Loading';
 import { SidebarInfo } from './SidebarInfo';
 import { SidebarCoins } from './SidebarCoins';
 import { CoinNews } from './CoinNews';
+import { useFetch } from '../../Hooks/useFetch';
 
 export const Coin = () => {
-    const [coin, setCoin] = useState({});
-    const [isFetching, setIsFetching] = useState(true);
     const { id } = useParams();
 
-    useEffect(() => {
-        fetch(`https://api.coingecko.com/api/v3/coins/${id}?localization=false`)
-            .then((response) => response.json())
-            .then((data) => setCoin(data), setIsFetching(false))
-            .catch((err) => console.log(err));
-    }, [id]);
-    console.log(coin);
+    const FETCH_URL = `https://api.coingecko.com/api/v3/coins/${id}?localization=false`;
+
+    const { data: coin, isFetching } = useFetch(FETCH_URL, id);
     if (isFetching) return <Loading />;
 
     let idToUppercase;
