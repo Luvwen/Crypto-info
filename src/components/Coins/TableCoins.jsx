@@ -1,12 +1,37 @@
+import { StarIcon } from '@chakra-ui/icons';
 import { Image, Link, Stack, Tbody, Text, Th, Tr } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const TableCoins = ({ coins }) => {
+    const [favorites, setFavorites] = useState(() => {
+        const favsFromStorage = localStorage.getItem('favorites');
+        if (favsFromStorage) return JSON.parse(favsFromStorage);
+        return [];
+    });
+    const handleAddFavs = (index) => () => {
+        setFavorites((prevState) => ({
+            ...prevState,
+            [index]: !prevState[index],
+        }));
+    };
+
+    useEffect(() => {
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }, [favorites]);
+
     return (
         <Tbody>
-            {coins.map((coin, index) => {
+            {coins?.map((coin, index) => {
                 return (
                     <Tr key={index}>
+                        <Th textAlign="center">
+                            <StarIcon
+                                color={favorites[index] ? 'orange' : 'gray'}
+                                cursor="pointer"
+                                onClick={handleAddFavs(index)}
+                            />
+                        </Th>
                         <Th textAlign="center">{index}</Th>
                         <Th textAlign="center">
                             <Link as={RouterLink} to={`/coins/${coin.id}`}>

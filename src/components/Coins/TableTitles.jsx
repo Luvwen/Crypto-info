@@ -3,6 +3,7 @@ import React from 'react';
 
 export const TableTitles = () => {
     const COLUMN_INFO = [
+        'Fav',
         '#',
         'Nombre',
         'Precio',
