@@ -31,7 +31,9 @@ export const NavbarListLinks = () => {
                     </Text>
                 </Link>
             </Stack>
-            <Text cursor="pointer">Lista de seguimiento</Text>
+            <Link as={LinkRouter} to="/favorites">
+                <Text cursor="pointer">Lista de seguimiento</Text>
+            </Link>
         </>
     );
 };
