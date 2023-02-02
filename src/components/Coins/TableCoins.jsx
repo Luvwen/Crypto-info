@@ -1,7 +1,7 @@
-import { StarIcon } from '@chakra-ui/icons';
-import { Image, Link, Stack, Tbody, Text, Th, Tr } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { Image, Link, Stack, Tbody, Text, Th, Tr } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
 
 export const TableCoins = ({ coins }) => {
     const [favorites, setFavorites] = useState(() => {

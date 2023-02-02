@@ -1,6 +1,5 @@
-import { Collapse, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
-
+import { Collapse, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import { CRYPTO_FAQ_INFO } from '../../constants/constants';
 
 export const SidebarInfo = () => {

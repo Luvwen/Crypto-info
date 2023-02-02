@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Stack, Table } from '@chakra-ui/react';
 import { Loading } from './Loading';
 import { TableCoins } from './Coins/TableCoins';
